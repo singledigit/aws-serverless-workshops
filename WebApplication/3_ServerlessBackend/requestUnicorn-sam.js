@@ -22,7 +22,7 @@ const fleet = [
     },
 ];
 
-exports.handler = (event, context, callback) => {
+exports.lambdaHandler = (event, context, callback) => {
     if (!event.requestContext.authorizer) {
       errorResponse('Authorization not configured', context.awsRequestId, callback);
       return;
