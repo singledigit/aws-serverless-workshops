@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09' 
+Transform: AWS::Serverless-2016-10-31 
+Description: Cognito User Pool Setup 
+ 
+Parameters: 
+  AppName: 
+    Type: String 
+    Default: WildRydes
+
+Globals:
+  Api:
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'*'"
+  Function:
+    Handler: app.lambdaHandler
+    Timeout: 3
+    Tracing: Active
+    Runtime: nodejs10.x
+    Layers:
+      - arn:aws:lambda:eu-central-1:700336187521:layer:aws-sdk:5 ## Only works in Frankfurt
+ 
+Resources: 
+  UserPool: 
+    Type: AWS::Cognito::UserPool 
+    Properties: 
+      UserPoolName: !Sub ${AppName}
+      AutoVerifiedAttributes:
+        - email
+   
+  UserPoolClient: 
+    Type: AWS::Cognito::UserPoolClient 
+    Properties: 
+      UserPoolId: !Ref UserPool 
+      ClientName: !Sub ${AppName}WebApp 
+      GenerateSecret: false
+  
+  DynamoDBTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: RideId
+        Type: String
+        
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: request-unicorn/
+      Environment:
+        Variables:
+          UNICORN_TABLE: !Ref DynamoDBTable
+      Policies:
+        - DynamoDBCrudPolicy: {TableName: !Ref DynamoDBTable}
+      Events:
+        Process:
+          Type: Api
+          Properties:
+            RestApiId: !Ref WildRydesAPI
+            Path: /ride
+            Method: POST
+            Auth:
+              Authorizer: WildRydes
+            
+  WildRydesAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        Authorizers:
+          WildRydes:
+            UserPoolArn: !GetAtt UserPool.Arn
+ 
+Outputs: 
+  UserPoolId: 
+    Description: "Cognito User Pool Id" 
+    Value: !Ref UserPool
+ 
+  UserPoolClientId: 
+    Description: "Cognito User Pool Client Id" 
+    Value: !Ref UserPoolClient
+
+  TableName:
+    Description: "Table name for unicorn records"
+    Value: !Ref DynamoDBTable
+
+  ApiGatewayUrl:
+      Description: "API Gateway endpoint URL"
+      Value: !Sub "https://${WildRydesAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod"
