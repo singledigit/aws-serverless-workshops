@@ -20,6 +20,7 @@ architecture and verify your work.
 | [User Management][user-management] | Configure user management for the website using Amazon Cognito. |
 | [Serverless Backend][serverless-backend] | Create an AWS Lambda function that will persist data to an Amazon DynamoDB table. |
 | [RESTful APIs][restful-apis] | Expose the Lambda function via an Amazon API Gateway as a RESTful API that the static site can call. |
+| [RESTful APIs with SAM][restful-apis-sam] | Building the same resources as chapter 4 ut with SAM. |
 
 :warning: These modules are intended to be executed linearly.
 
@@ -44,4 +45,5 @@ AWS Account.
 [user-management]: 2_UserManagement/
 [serverless-backend]: 3_ServerlessBackend/
 [restful-apis]: 4_RESTfulAPIs/
+[restful-apis-sam]: 4.5_RESTfulAPIs_SAM/
 [cleanup]: 9_CleanUp/
