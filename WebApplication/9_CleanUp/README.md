@@ -45,7 +45,7 @@ Delete the Unicorn Manager CloudFront distribution and S3 bucket for the static 
 
 </p></details>
 
-### 3. Module 4.5 - REST API with SAM Cleanup
+### 3. Module 4b - REST API with SAM Cleanup
 Delete the SAM version of the REST API created in module 4.5. There is a **Delete** option for the CloudFormation stack. The S3 bucket must also be deleted.
 
 **:white_check_mark: Step-by-step directions**

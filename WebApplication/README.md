@@ -45,5 +45,5 @@ AWS Account.
 [user-management]: 2_UserManagement/
 [serverless-backend]: 3_ServerlessBackend/
 [restful-apis]: 4_RESTfulAPIs/
-[restful-apis-sam]: 4_5_RESTfulAPIs_SAM/
+[restful-apis-sam]: 4b_RESTfulAPIs_SAM/
 [cleanup]: 9_CleanUp/

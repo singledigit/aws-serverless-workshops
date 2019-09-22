@@ -1,4 +1,4 @@
-# Module 4.5: Using SAM and the SAM CLI
+# Module 4b: Using SAM and the SAM CLI
 
 In this module you will rebuild everything you built in modules 2-4 utilizing SAM and the SAM CLI. By the end of this module you will have a second API, lambda, and Cognito Userpool implementation.
 
