@@ -45,6 +45,19 @@ Delete the Unicorn Manager CloudFront distribution and S3 bucket for the static 
 
 </p></details>
 
+### 3. Module 4.5 - REST API with SAM Cleanup
+Delete the SAM version of the REST API created in module 4.5. There is a **Delete** option for the CloudFormation stack. The S3 bucket must also be deleted.
+
+**:white_check_mark: Step-by-step directions**
+1. From the terminal in Cloud9 run the following command to delete the CloudFormation stack
+    ```bash
+    aws cloudformation delete-stack --stack-name wild-rydes
+    ```
+1. Run the following command to delete your bucket
+    ```bash
+    aws s3 rb s3://<your-bucket-name> --force
+    ```
+
 ### 3. Module 4 - REST API Cleanup
 Delete the REST API created in module 4. There is a **Delete API** option in the **Actions** drop-down when you select your API in the Amazon API Gateway Console.
 

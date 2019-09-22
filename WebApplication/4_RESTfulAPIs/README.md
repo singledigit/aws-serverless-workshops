@@ -160,7 +160,7 @@ Update the /js/config.js file in your website deployment to include the invoke U
 
 ### Next
 
-:white_check_mark: See this workshop's [cleanup guide][cleanup] for instructions on how to delete the resources you've created.
+This is the stoppong point for this part of the workshop.
 
 [amplify-console]: https://aws.amazon.com/amplify/console/
 [amplify-console-console]: https://console.aws.amazon.com/amplify/home
