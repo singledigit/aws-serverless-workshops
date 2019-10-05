@@ -35,18 +35,18 @@ Use the SAM CLI to create a new serverless application for the backend. Run thes
     ```
 
 ### 4. Update the SAM template file
-The SASM template, located in the root and called **template.yaml** is the full description of the new application. This needs to be updated from [template-sam.yaml](template-sam.yaml)
+The SAM template, located in the root and called **template.yaml** is the full description of the new application. This needs to be updated from [template-sam.yaml](template-sam.yaml)
 
 **:white_check_mark: Step-by-step directions**
 1. Open **wr-sam** > **template.yaml**
 1. Replace the entire contents with the text from [template-sam.yaml](template-sam.yaml)
 
 ### 4. Update the Lambda Function code
-Update Lambda function application code with [requestUnicorn.js](requestUnicorn.js)
+Update Lambda function application code with [requestUnicorn-sam.js](requestUnicorn-sam.js)
 
 **:white_check_mark: Step-by-step directions**
 1. Open **wr-sam** > **request-unicorn** > **app.js**
-1. Replace the entire contents with the code from [requestUnicorn.js](requestUnicorn.js)
+1. Replace the entire contents with the code from [requestUnicorn-sam.js](requestUnicorn-sam.js)
 
 ### 5. Package and deploy the application
 Deploy the serverless application to your account. 
@@ -66,14 +66,14 @@ Deploy the serverless application to your account.
     ```
 
 ### 6. Update the Website Config
-Update the /js/config.js file in your website deployment to update to the new application params that you just created. The parameters have been output to the CloudFormation stack.
+Update the /js/config.js file in your website deployment to update to the new application params that you just created. The parameters are outputs of the CloudFormation stack.
 
 **:white_check_mark: Step-by-step directions**
-1. Open up the [CloudFormation console](cloudformation-console)
+1. Open up the [CloudFormation console][cloudformation-console]
 1. Choose *wild-rydes* from the stack list
 1. Choose the **Outputs** tab
 1. On your Cloud9 development environment open `js/config.js`
-1. Update the **userPooliId**, **userPoolClientId**, **region**, and **invokeUrl** setting in the config.js file from the values on the **Outputs** tab.
+1. Update the **userPoolId**, **userPoolClientId**, **region**, and **invokeUrl** setting in the config.js file from the values on the **Outputs** tab.
     An example of a complete `config.js` file is included below. Note, the actual values in your file will be different.
     ```JavaScript
     window._config = {
@@ -99,7 +99,7 @@ Update the /js/config.js file in your website deployment to update to the new ap
 
 
 ## Implementation Validation
-You will need to register your email again as this is using a new UserPool in cognito.
+You will need to register your email again as this is using a new Cognito User Pool.
 
 **:white_check_mark: Step-by-step directions**
 1. Go to `/register.html` to register
@@ -108,7 +108,7 @@ You will need to register your email again as this is using a new UserPool in co
 1. Test requesting a unicorn as before.
 
 ## Extra Credit: Test Locally
-With SAM CLI you can test Lambda functions locally. We need to create several files to do so. First, we will create an event.json file that contains a post event as if we were hitting it with an API endpoint. Second we will create a local environent file that tells the Lambda what values it should use for environment variables locally.
+With SAM CLI you can test Lambda functions locally. We need to create several files to do so. First, we will create an event.json file that contains a post event similar to invoking our Lambda function via Amazon API Gateway. Second, we will create a local environent file that tells our Lambda function what values it should use locally for environment variables.
 
 **:white_check_mark: Step-by-step directions**
 1. Create a file in the root of **wr-sam** called *env.json*
@@ -168,6 +168,6 @@ REPORT RequestId: c109149a-5417-13c6-6791-2616175999c3  Duration: 103.43 ms     
 
 :white_check_mark: See this workshop's [cleanup guide][cleanup] for instructions on how to delete the resources you've created.
 
-
+[amplify-console-console]: https://console.aws.amazon.com/amplify/home
 [cloudformation-console]: https://console.aws.amazon.com/cloudformation/home
 [cleanup]: ../9_CleanUp/
